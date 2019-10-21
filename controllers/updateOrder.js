@@ -576,7 +576,7 @@ function updateDemography(params, callback) {
     if(!params.id) return callback("id not found");
     if(!params.updateobj) return callback("Demography not found");
     var logs = [];
-
+console.log("here")
     //waterfall update client specialneed
     var updateClient = function(next) {
 
@@ -653,8 +653,13 @@ function updateDemography(params, callback) {
 
             var oldArr = newOldArr.oldArr;
             var newArr = newOldArr.newArr;
-            
 
+            //Added by Talat: MRN update
+            //{value: "none", key: "assign to"}
+            if(order.client_id.externalId != params.updateobj.externalId){
+                newArr.push({value:params.updateobj.externalId,key:"MRN Number"});
+                oldArr.push({value:order.client_id.externalId,key:"MRN Number"});
+            }
             if(newArr.length)
             {
                 log(order, newArr, oldArr);
